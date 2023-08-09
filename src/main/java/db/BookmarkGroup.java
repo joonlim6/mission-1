@@ -8,7 +8,7 @@ import lombok.Setter;
 public class BookmarkGroup {
 	private int groupId;
 	private String groupName;
-	private int order;
+	private int groupOrder;
 	private String registerDate;
 	private String lastEdit;
 }

@@ -39,7 +39,7 @@
     
     <form action="add-bookmark.jsp?mgrNumber=<%=mgrNumber%>" method="post">
         <select name="groupId">
-            <option value="" disabled>북마크 그룹 이름 선택</option>
+            <option value="북마크 그룹 이름 선택" selected="selected" disabled>북마크 그룹 이름 선택</option>
             <%
                 for (BookmarkGroup bg : bgList) {
             %>

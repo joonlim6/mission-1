@@ -70,7 +70,7 @@
 			            <%=groupName%>
 			        </td>
 			        <td>
-			            <%=bmg.getOrder()%>
+			            <%=bmg.getGroupOrder()%>
 			        </td>
 			        <td>
 			            <%=bmg.getRegisterDate()%>
@@ -79,7 +79,7 @@
 			            <%=bmg.getLastEdit() == null ? "" : bmg.getLastEdit()%>
 			        </td>
 			        <td>
-			            <a href="edit-bookmark-group.jsp?name=<%=groupName%>">
+			            <a href="edit-bookmark-group.jsp?id=<%=bmg.getGroupId()%>">
 			                수정
 			            </a>
 			            <a href="delete-bookmark-group.jsp?name=<%=groupName%>">
