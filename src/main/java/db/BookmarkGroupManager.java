@@ -1,6 +1,5 @@
 package db;
 
-import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -12,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BookmarkGroupManager {
-	private final static String URL = "jdbc:sqlite:/"+Paths.get("").toAbsolutePath().toString()+"/wifi.db";
+	private final static String URL = "jdbc:sqlite:resources:wifi.db";
 	
 	public void deleteTable() {
 		int affected = -1;

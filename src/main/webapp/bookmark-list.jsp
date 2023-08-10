@@ -1,3 +1,6 @@
+<%@ page import="db.BookmarkManager" %>
+<%@ page import="db.Bookmark" %>
+<%@ page import="java.util.List" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -41,6 +44,45 @@
 			</tr>
 	    </thead>
 	    <tbody>
+	    	<%
+	    		BookmarkManager bmm = new BookmarkManager();
+	    		bmm.createBookmarkTable();
+	    		List<Bookmark> bmList = bmm.getAllBookmarks();
+	    		
+	    		if(bmList.size() == 0) {
+	    	%>
+	            <tr>
+	              <td style="text-align:center;" colspan="5">북마크가 존재하지 않습니다</td>
+	            </tr>	    	
+	    	<%
+	    		}
+	    		
+	    		for(Bookmark bm : bmList) {
+	    			String gName = bm.getGroupName();
+	    			String mNum = bm.getMainNumber();
+	    			String regDate = bm.getRegisterDate();
+	    	%>
+	    			<tr>  	   
+	    	   		  <td>
+	    	   				<%=bm.getBookmarkId()%>
+	    	   	      </td>
+	    	   	      <td>
+	    	   	      		<%=gName%>
+	    	   		  </td>
+	    	   		  <td>
+	    	   				<%=mNum%>
+	    	   		  </td>
+	    	   		  <td>
+	    	   				<%=regDate%>
+	    	   		  </td>
+	    	   		  <td>
+	    	   				<a href="delete-bookmark.jsp?gName=<%=gName%>&mNum=<%=mNum%>&regDate=<%=regDate%>">삭제</a>
+	    	   		  </td> 
+    	   			</tr>
+	    	
+ 		   	<%
+	    		}
+	    	%>
 	    </tbody>
      </table>
 </body>
