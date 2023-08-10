@@ -32,24 +32,26 @@
     	
     	WifiManager wm = new WifiManager();
     	Wifi wifi = wm.get(mgrNumber);
+    	String mainNumber = wifi.getMainNumber();
     	BookmarkGroupManager bgm = new BookmarkGroupManager();
     	bgm.createBookmarkGroupTable();
     	List<BookmarkGroup> bgList = bgm.getBookmarkGroups();
     %>
     
-    <form action="add-bookmark.jsp?mgrNumber=<%=mgrNumber%>" method="post">
-        <select name="groupId">
+    <form action="add-bookmark.jsp" method="post">
+        <select name="groupName">
             <option value="북마크 그룹 이름 선택" selected="selected" disabled>북마크 그룹 이름 선택</option>
             <%
-                for (BookmarkGroup bg : bgList) {
+                for (BookmarkGroup bmg : bgList) {
             %>
-		            <option value="<%= bg.getGroupId()%>"><%= bg.getGroupName()%></option>
+		            <option value="<%=bmg.getGroupName()%>"><%=bmg.getGroupName()%></option>
             <%
                 }
             %>
         </select>
 
         <input type="submit" value="북마크 추가하기">
+        <input type="hidden" name="mainNumber" value="<%=mainNumber%>">
     </form>
     
    	<table>

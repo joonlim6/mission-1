@@ -7,7 +7,7 @@ import lombok.Setter;
 @Setter
 public class Bookmark {
 	private int bookmarkId;
-	private int groupName;
+	private int groupId;
 	private String mainNumber;
 	private String registerDate;
 }

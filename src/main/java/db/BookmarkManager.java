@@ -6,6 +6,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 
 public class BookmarkManager {
 	private final static String URL = "jdbc:sqlite:/"+Paths.get("").toAbsolutePath().toString()+"/wifi.db";
@@ -33,23 +35,13 @@ public class BookmarkManager {
 			if(rs.next()) {
 				System.out.println("테이블이 이미 존재합니다");
 			}	else {
-				String createTbl = "CREATE TABLE WIFI (\r\n"
-						+ "    X_SWIFI_MGR_NO      TEXT    PRIMARY KEY NOT NULL,\r\n"
-						+ "    X_SWIFI_WRDOFC      TEXT    NULL,\r\n"
-						+ "    X_SWIFI_MAIN_NM     TEXT    NULL,\r\n"
-						+ "    X_SWIFI_ADRES1      TEXT    NULL,\r\n"
-						+ "    X_SWIFI_ADRES2      TEXT    NULL,\r\n"
-						+ "    X_SWIFI_INSTL_FLOOR TEXT    NULL,\r\n"
-						+ "    X_SWIFI_INSTL_TY    TEXT    NULL,\r\n"
-						+ "    X_SWIFI_INSTL_MBY   TEXT    NULL,\r\n"
-						+ "    X_SWIFI_SVC_SE      TEXT    NULL,\r\n"
-						+ "    X_SWIFI_CMCWR       TEXT    NULL,\r\n"
-						+ "    X_SWIFI_CNSTC_YEAR  INTEGER NULL,\r\n"
-						+ "    X_SWIFI_INOUT_DOOR  TEXT    NULL,\r\n"
-						+ "    X_SWIFI_REMARS3     TEXT    NULL,\r\n"
-						+ "    LAT                 REAL    NULL,\r\n"
-						+ "    LNT                 REAL    NULL,\r\n"
-						+ "    WORK_DTTM           TEXT    NULL\r\n"
+				String createTbl = "CREATE TABLE BOOKMARK (\r\n"
+						+ "	BOOKMARK_ID	INTEGER	PRIMARY KEY	AUTOINCREMENT,\r\n"
+						+ "	GROUP_NAME	TEXT	NOT NULL,\r\n"
+						+ "	MAIN_NUMBER	TEXT	NULL,\r\n"
+						+ "	REGISTER_DATE	TEXT	NULL\r\n"
+						+ "	FOREIGN KEY('GROUP_NAME') REFERENCES 'BOOKMARK_GROUP'('GROUP_NAME') ON DELETE CASCADE,\r\n"
+						+ " FOREIGN KEY('MAIN_NUMBER') REFERENCES 'WIFI'('X_SWIFI_MAIN_NM') ON DELETE CASCADE\r\n"
 						+ ");";
 				ps_2 = conn.prepareStatement(createTbl);
 				affected = ps.executeUpdate();
@@ -81,8 +73,10 @@ public class BookmarkManager {
 		}		
 	}
 	
-	public void addBookmark(String groupName, String mainNumber) {
-		String sql = "INSERT INTO BOOKMARK('GROUP_NAME', 'MAIN_NUMBER', 'REG_DATE') VALUES(?,?,?)";
+	public int addBookmark(String groupName, String mainNumber) {
+		String sql = "INSERT INTO BOOKMARK('GROUP_NAME', 'MAIN_NUMBER', 'REGISTER_DATE') VALUES(?,?,?)";
+		LocalDateTime ldt = LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS);
+		int affected = -1;
 		
 		try {
 			Class.forName("org.sqlite.JDBC");
@@ -92,6 +86,35 @@ public class BookmarkManager {
 		
 		Connection conn = null;
 		PreparedStatement ps = null;
-		ResultSet rs = null;
+		
+		try {
+			conn = DriverManager.getConnection(URL);
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, groupName);
+			ps.setString(2, mainNumber);
+			ps.setString(3, ldt.toString());
+			
+			affected = ps.executeUpdate();
+			
+			if(affected > 0) {
+				System.out.println("북마크가 성공적으로 추가되었습니다");
+			}
+		
+		}	catch (SQLException e1) {
+			e1.printStackTrace();
+		} 	finally {
+		    try {
+				if(conn != null && !conn.isClosed()) conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}		    
+		    try {
+				if(ps != null && !ps.isClosed()) ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return affected > 0 ? 1 : -1;
 	}
 }
