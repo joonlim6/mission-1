@@ -479,6 +479,8 @@ public class BookmarkGroupManager {
 				e.printStackTrace();
 			}
 		}
+        
+        int lastOrder = lastOrder();
      
         try {
         	conn = DriverManager.getConnection(URL);
@@ -505,12 +507,9 @@ public class BookmarkGroupManager {
 			}
 		}
         
-        postDelete(after);
+        updateOrder(after, lastOrder);
         
         return affected > 0 ? 1 : -1;
 	}
 	
-	public void postDelete(int after) {
-		updateOrder(after, lastOrder());
-	}
 }

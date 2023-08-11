@@ -21,66 +21,6 @@ import com.google.gson.JsonObject;
 public class WifiManager {
 	private final static String URL = "jdbc:sqlite:resources:wifi.db";
 	
-	public int insert(Wifi wifi) {
-		int affected = -1;
-		String sql = "INSERT INTO WIFI VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);\n";
-		
-		try {
-			Class.forName("org.sqlite.JDBC");
-		} catch (ClassNotFoundException e1) {
-			e1.printStackTrace();
-		}
-		
-		Connection conn = null;
-		PreparedStatement ps = null;
-		
-		try {
-			conn = DriverManager.getConnection(URL);
-			ps = conn.prepareStatement(sql);
-			
-			ps.setString(1, wifi.getMgrNumber());
-			ps.setString(2, wifi.getWrdofc());
-			ps.setString(3, wifi.getMainNumber());
-			ps.setString(4, wifi.getAddress1());
-			ps.setString(5, wifi.getAddress2());
-			ps.setString(6, wifi.getInstallFloor());
-			ps.setString(7, wifi.getInstallTy());
-			ps.setString(8, wifi.getInstallMby());
-			ps.setString(9, wifi.getSvcSe());
-			ps.setString(10, wifi.getCmcwr());
-			ps.setInt(11,  wifi.getCnstcYear());
-			ps.setString(12, wifi.getInOutDoor());
-			ps.setString(13,  wifi.getRemars3());
-			ps.setDouble(14, wifi.getLatitude());
-			ps.setDouble(15, wifi.getLongitude());
-			ps.setString(16, wifi.getWorkDttm());
-			affected = ps.executeUpdate();
-			
-			if (affected > 0) {
-                System.out.println("단일 와이파이 데이터 저장 성공");
-            } else {
-            	System.out.println("단일 와이파이 데이터 저장 실패");
-            }
-			
-		}	catch (SQLException e1) {
-			e1.printStackTrace();
-		} 	finally {
-		    try {
-				if(conn != null && !conn.isClosed()) conn.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		    
-		    try {
-				if(ps != null && !ps.isClosed()) ps.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-		
-		return affected;
-	}
-	
 	public void insertAll(int totalNum) throws IOException {
 		String sql = "INSERT INTO WIFI VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);\n";
 		

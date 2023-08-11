@@ -15,6 +15,7 @@
       th,
       td {
         border: solid 1px #000;
+        text-align: center;
       }
     </style>
 </head>
