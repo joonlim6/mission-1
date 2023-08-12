@@ -167,17 +167,17 @@ public class WifiManager {
 		}	catch (SQLException e1) {
 			e1.printStackTrace();
 		} 	finally {
-		    try {
+		    	try {
 				if(conn != null && !conn.isClosed()) conn.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-		    try {
+		    	try {
 				if(ps != null && !ps.isClosed()) ps.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-		    try {
+		    	try {
 				if(rs != null && !rs.isClosed()) rs.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
