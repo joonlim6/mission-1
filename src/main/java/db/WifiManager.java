@@ -25,19 +25,19 @@ public class WifiManager {
 		String sql = "INSERT INTO WIFI VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);\n";
 		
 		try {
-            Class.forName("org.sqlite.JDBC");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
+	            Class.forName("org.sqlite.JDBC");
+	        } catch (ClassNotFoundException e) {
+	            e.printStackTrace();
+	        }
 
-        Connection conn = null;
-        PreparedStatement ps = null;
+	        Connection conn = null;
+	        PreparedStatement ps = null;
 
         
-        try {
-        	conn = DriverManager.getConnection(URL);
-        	conn.setAutoCommit(false);
-        	ps = conn.prepareStatement(sql);
+        	try {
+	        	conn = DriverManager.getConnection(URL);
+	        	conn.setAutoCommit(false);
+	        	ps = conn.prepareStatement(sql);
         	
 			for(int i = 0; i <= totalNum/1000; i++) {
 				int start = i*1000+1;
@@ -99,20 +99,20 @@ public class WifiManager {
 					ps.clearParameters();
 				}
 				
-                ps.executeBatch();
-                ps.clearBatch();
-                conn.commit();
+               			ps.executeBatch();
+                		ps.clearBatch();
+                		conn.commit();
                 
 			}
-        }	catch (SQLException e1) {
+        	}	catch (SQLException e1) {
 			e1.printStackTrace();
 		} 	finally {
-		    try {
+			try {
 				if(conn != null && !conn.isClosed()) conn.close();
 			} catch (SQLException e) {
-				e.printStackTrace();
+					e.printStackTrace();
 			}
-		    try {
+			try {
 				if(ps != null && !ps.isClosed()) ps.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -137,9 +137,9 @@ public class WifiManager {
 		try {
 			conn = DriverManager.getConnection(URL);
 			ps = conn.prepareStatement(sql);
-		    ps.setString(1, MgrNumber);
+		    	ps.setString(1, MgrNumber);
 		    
-		    rs = ps.executeQuery();
+		   	rs = ps.executeQuery();
 			
 			if(!rs.next()) {
 				System.out.println("데이터가 존재하지 않습니다");
@@ -221,24 +221,24 @@ public class WifiManager {
 		try {
 			conn = DriverManager.getConnection(URL);
 			ps = conn.prepareStatement(updateSql);
-		    ps.setString(1, wifi.getWrdofc());
-		    ps.setString(2, wifi.getMainNumber());
-		    ps.setString(3, wifi.getAddress1());
-		    ps.setString(4, wifi.getAddress2());
-		    ps.setString(5, wifi.getInstallFloor());
-		    ps.setString(6, wifi.getInstallTy());
-		    ps.setString(7, wifi.getInstallMby());
-		    ps.setString(8, wifi.getSvcSe());
-		    ps.setString(9, wifi.getCmcwr());
-		    ps.setInt(10, wifi.getCnstcYear());
-		    ps.setString(11, wifi.getInOutDoor());
-		    ps.setString(12, wifi.getRemars3());
-		    ps.setDouble(13, wifi.getLatitude());
-		    ps.setDouble(14, wifi.getLongitude());
-		    ps.setString(15, wifi.getWorkDttm());
-		    ps.setString(16, wifi.getMgrNumber());
+			ps.setString(1, wifi.getWrdofc());
+			ps.setString(2, wifi.getMainNumber());
+			ps.setString(3, wifi.getAddress1());
+			ps.setString(4, wifi.getAddress2());
+			ps.setString(5, wifi.getInstallFloor());
+			ps.setString(6, wifi.getInstallTy());
+			ps.setString(7, wifi.getInstallMby());
+			ps.setString(8, wifi.getSvcSe());
+			ps.setString(9, wifi.getCmcwr());
+			ps.setInt(10, wifi.getCnstcYear());
+			ps.setString(11, wifi.getInOutDoor());
+			ps.setString(12, wifi.getRemars3());
+			ps.setDouble(13, wifi.getLatitude());
+			ps.setDouble(14, wifi.getLongitude());
+			ps.setString(15, wifi.getWorkDttm());
+			ps.setString(16, wifi.getMgrNumber());
 		    
-		    affected = ps.executeUpdate();
+			affected = ps.executeUpdate();
 			
 			if(affected > 0) {
 				System.out.println("업데이트가 됐습니다");
@@ -247,14 +247,14 @@ public class WifiManager {
 		}	catch (SQLException e1) {
 			e1.printStackTrace();
 		} 	finally {
-		    try {
+			try {
 				if(conn != null && !conn.isClosed()) conn.close();
-			} catch (SQLException e) {
+		    	} catch (SQLException e) {
 				e.printStackTrace();
-			}
-		    try {
+		    	}
+		    	try {
 				if(ps != null && !ps.isClosed()) ps.close();
-			} catch (SQLException e) {
+		    	} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		} 
@@ -309,17 +309,17 @@ public class WifiManager {
 		}	catch (SQLException e1) {
 			e1.printStackTrace();
 		} 	finally {
-		    try {
+		    	try {
 				if(conn != null && !conn.isClosed()) conn.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}		    
-		    try {
+		    	try {
 				if(ps != null && !ps.isClosed()) ps.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-		    try {
+		   	try {
 				if(rs != null && !rs.isClosed()) rs.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -353,12 +353,12 @@ public class WifiManager {
 		}	catch (SQLException e1) {
 			e1.printStackTrace();
 		} 	finally {
-		    try {
+		    	try {
 				if(conn != null && !conn.isClosed()) conn.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}		    
-		    try {
+		    	try {
 				if(ps != null && !ps.isClosed()) ps.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -403,17 +403,17 @@ public class WifiManager {
 		}	catch (SQLException e1) {
 			e1.printStackTrace();
 		} 	finally {
-		    try {
+		    	try {
 				if(conn != null && !conn.isClosed()) conn.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-		    try {
+		    	try {
 				if(ps != null && !ps.isClosed()) ps.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-		    try {
+		    	try {
 				if(rs != null && !rs.isClosed()) rs.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
