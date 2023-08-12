@@ -78,22 +78,22 @@ public class WifiManager {
 				for(int j = 0; j < rows.size(); j++) {
 					JsonObject row = rows.get(j).getAsJsonObject();
 					
-                    ps.setString(1, row.get("X_SWIFI_MGR_NO").getAsString());
-                    ps.setString(2, row.get("X_SWIFI_WRDOFC").getAsString());
-                    ps.setString(3, row.get("X_SWIFI_MAIN_NM").getAsString());
-                    ps.setString(4, row.get("X_SWIFI_ADRES1").getAsString());
-                    ps.setString(5, row.get("X_SWIFI_ADRES2").getAsString());
-                    ps.setString(6, row.get("X_SWIFI_INSTL_FLOOR").getAsString());
-                    ps.setString(7, row.get("X_SWIFI_INSTL_TY").getAsString());
-                    ps.setString(8, row.get("X_SWIFI_INSTL_MBY").getAsString());
-                    ps.setString(9, row.get("X_SWIFI_SVC_SE").getAsString());
-                    ps.setString(10, row.get("X_SWIFI_CMCWR").getAsString());
-                    ps.setInt(11, row.get("X_SWIFI_CNSTC_YEAR").getAsInt());
-                    ps.setString(12, row.get("X_SWIFI_INOUT_DOOR").getAsString());
-                    ps.setString(13, row.get("X_SWIFI_REMARS3").getAsString());
-                    ps.setDouble(14, row.get("LAT").getAsDouble());
-                    ps.setDouble(15, row.get("LNT").getAsDouble());
-                    ps.setString(16, row.get("WORK_DTTM").getAsString());
+					ps.setString(1, row.get("X_SWIFI_MGR_NO").getAsString());
+					ps.setString(2, row.get("X_SWIFI_WRDOFC").getAsString());
+					ps.setString(3, row.get("X_SWIFI_MAIN_NM").getAsString());
+					ps.setString(4, row.get("X_SWIFI_ADRES1").getAsString());
+					ps.setString(5, row.get("X_SWIFI_ADRES2").getAsString());
+					ps.setString(6, row.get("X_SWIFI_INSTL_FLOOR").getAsString());
+					ps.setString(7, row.get("X_SWIFI_INSTL_TY").getAsString());
+					ps.setString(8, row.get("X_SWIFI_INSTL_MBY").getAsString());
+					ps.setString(9, row.get("X_SWIFI_SVC_SE").getAsString());
+					ps.setString(10, row.get("X_SWIFI_CMCWR").getAsString());
+					ps.setInt(11, row.get("X_SWIFI_CNSTC_YEAR").getAsInt());
+					ps.setString(12, row.get("X_SWIFI_INOUT_DOOR").getAsString());
+					ps.setString(13, row.get("X_SWIFI_REMARS3").getAsString());
+					ps.setDouble(14, row.get("LAT").getAsDouble());
+				    	ps.setDouble(15, row.get("LNT").getAsDouble());
+				    	ps.setString(16, row.get("WORK_DTTM").getAsString());
 					
 					ps.addBatch();
 					ps.clearParameters();
