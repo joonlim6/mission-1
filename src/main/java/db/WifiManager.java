@@ -92,8 +92,8 @@ public class WifiManager {
 					ps.setString(12, row.get("X_SWIFI_INOUT_DOOR").getAsString());
 					ps.setString(13, row.get("X_SWIFI_REMARS3").getAsString());
 					ps.setDouble(14, row.get("LAT").getAsDouble());
-				    	ps.setDouble(15, row.get("LNT").getAsDouble());
-				    	ps.setString(16, row.get("WORK_DTTM").getAsString());
+					ps.setDouble(15, row.get("LNT").getAsDouble());
+					ps.setString(16, row.get("WORK_DTTM").getAsString());
 					
 					ps.addBatch();
 					ps.clearParameters();
